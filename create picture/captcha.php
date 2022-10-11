@@ -49,8 +49,12 @@
             imagestring($image, 5, $strx, $strpos, substr($code, $i, 1), $black);
             $strx += rand(10, 30);
         }
-
         imagepng($image);
+
+        /*$save = $code.".png";
+        chmod($save,0777);
+        imagepng($image, $save);*/
+
         imagedestroy($image);
     }
 ?>
