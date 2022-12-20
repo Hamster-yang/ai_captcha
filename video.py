@@ -18,8 +18,8 @@ import os
 import cv2
 import glob
 
-video_path = '20221219-3.mp4'
-output_folder = './output/'
+video_path = 'testvideo.mp4'
+output_folder = './'
 
 if os.path.isdir(output_folder):
     print("Delete old result folder: {}".format(output_folder))
@@ -38,16 +38,17 @@ for idx in range(frame_count):
     ret, frame = vc.read()
     height, width, layers = frame.shape
     size = (width, height)
-    video.append(frame)
+    if idx%30==0:
+        video.append(frame)
+        if frame is not None:
+            file_name = '{}{:08d}.jpg'.format(output_folder,idx)
+            cv2.imwrite(file_name, frame)
     
-    if frame is not None:
-        file_name = '{}{:08d}.jpg'.format(output_folder,idx)
-        cv2.imwrite(file_name, frame)
 
     print("\rprocess: {}/{}".format(idx+1 , frame_count), end = '')
 vc.release()
 
-for i in range(30):
+for i in range(70):
   cv2.imshow('frame',video[i])
   cv2.waitKey()
 
