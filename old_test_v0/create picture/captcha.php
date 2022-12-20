@@ -12,13 +12,13 @@
       $width 圖片寬
       $high 圖片高
     */
-    imgcode(5,120,30);
+    imgcode(5,200,50);
 
     //imgcode的function
     function imgcode($nums,$width,$high) {
        
         //去除了數字0和1 字母小寫O和L，為了避免辨識不清楚
-        $str = "23456789abcdefghijkmnpqrstuvwxyzABCDEFGHIJKLMOPQRSTUBWXYZ";
+        $str = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUBWXYZ";
         $code = '';
         for ($i = 0; $i < $nums; $i++) {
             $code .= $str[mt_rand(0, strlen($str)-1)];
@@ -45,11 +45,13 @@
        
         $strx = rand(3, 8);
         for ($i = 0; $i < $nums; $i++) {
-            $strpos = rand(1, 6);
+            $strpos = rand(1, 25);
             imagestring($image, 5, $strx, $strpos, substr($code, $i, 1), $black);
-            $strx += rand(10, 30);
+            $strx += rand(10, 50);
         }
         imagepng($image);
+        #$save = "C:/Users/allen/Desktop/ai_captcha/train/". $code .".png";
+        #imagepng($image, $save);
 
         /*$save = $code.".png";
         chmod($save,0777);
