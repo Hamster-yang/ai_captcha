@@ -123,9 +123,14 @@ print('Test Loss and accuracy:', score)
 # Check model on some samples
 model.evaluate(X_test, [y_test[0], y_test[1], y_test[2], y_test[3], y_test[4]])
 
-model.save('model.h5')
+#model.save('model.h5')
 
 print(predict('C:/Users/allen/Desktop/ai_captcha/train/0A6JM.png'))
+print(predict('C:/Users/allen/Desktop/ai_captcha/train/JTtbn.png'))
+print(predict('C:/Users/allen/Desktop/ai_captcha/train/LoORS.png'))
+print(predict('C:/Users/allen/Desktop/ai_captcha/train/90WYy.png'))
+print(predict('C:/Users/allen/Desktop/ai_captcha/train/nP59g.png'))
+print(predict('C:/Users/allen/Desktop/ai_captcha/train/Ulg0R.png'))
 '''print("HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAH")
 print(predict('C:/Users/allen/Desktop/ai_captcha/train/0A6JM.png'))
 print(predict('C:/Users/allen/Desktop/ai_ml_opencv_pi/test/3cHfy.png'))
@@ -136,6 +141,10 @@ print(predict('C:/Users/allen/Desktop/ai_ml_opencv_pi/test/xCjjJ.png'))
 print(predict('C:/Users/allen/Desktop/ai_ml_opencv_pi/test/6xx7X.png'))
 print(predict('C:/Users/allen/Desktop/ai_ml_opencv_pi/test/3e8Co.png'))
 '''
+
+
+model.save('model.h5')
+
 while(1):
     str_path = input("path:")
     str=predict(str_path)
