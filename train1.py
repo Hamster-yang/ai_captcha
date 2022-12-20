@@ -89,7 +89,7 @@ X_train, y_train = X[:10000], y[:, :10000]#-------------------------------------
 X_test, y_test = X[1000:2000], y[:, 1000:2000]
 
 model=create_model()
-model.summary()
+#model.summary()
 
 hist = model.fit(X_train, [y_train[0], y_train[1], y_train[2], y_train[3], y_train[4]], batch_size=32, epochs=30,verbose=2, validation_split=0.2)#-------------------------------------------------------
 
@@ -141,7 +141,6 @@ print(predict('C:/Users/allen/Desktop/ai_ml_opencv_pi/test/xCjjJ.png'))
 print(predict('C:/Users/allen/Desktop/ai_ml_opencv_pi/test/6xx7X.png'))
 print(predict('C:/Users/allen/Desktop/ai_ml_opencv_pi/test/3e8Co.png'))
 '''
-
 
 model.save('model.h5')
 
