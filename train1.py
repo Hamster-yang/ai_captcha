@@ -23,7 +23,7 @@ import random
 #Init main values
 symbols = string.ascii_lowercase+ string.ascii_uppercase + "0123456789" # All symbols captcha can contain#-------------------------------------------------------
 num_symbols = len(symbols)
-img_shape = (50,200 , 1)#-------------------------------------------------------
+img_shape = (30,120 , 1)#-------------------------------------------------------
  
 #print(num_symbols)
 
@@ -55,7 +55,7 @@ def create_model():
 
 def preprocess_data():
     n_samples = len(os.listdir('./train'))
-    X = np.zeros((n_samples, 50, 200, 1)) #1070*50*200#-------------------------------------------------------
+    X = np.zeros((n_samples, 30, 120, 1)) #1070*50*200#-------------------------------------------------------
     y = np.zeros((5, n_samples, num_symbols)) #5*1070*36
 
     for i, pic in enumerate(os.listdir('./train')):
@@ -66,7 +66,7 @@ def preprocess_data():
         if len(pic_target) < 6:
             # Scale and reshape image
             img = img / 255.0
-            img = np.reshape(img, (50, 200, 1))#-------------------------------------------------------
+            img = np.reshape(img, (30, 120, 1))#-------------------------------------------------------
             # Define targets and code them using OneHotEncoding
             targs = np.zeros((5, num_symbols))
             for j, l in enumerate(pic_target):
@@ -78,6 +78,7 @@ def preprocess_data():
     # Return final data
     return X, y
 
+
 X, y = preprocess_data()
 '''
 state = np.random.get_state()
@@ -88,6 +89,8 @@ np.random.shuffle(y)'''
 X_train, y_train = X[:10000], y[:, :10000]#-------------------------------------------------------
 X_test, y_test = X[1000:2000], y[:, 1000:2000]
 
+
+
 model=create_model()
 #model.summary()
 
@@ -97,6 +100,8 @@ hist = model.fit(X_train, [y_train[0], y_train[1], y_train[2], y_train[3], y_tra
 # Define function to predict captcha
 def predict(filepath):
     img = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
+    img = cv2.medianBlur(img, img, 5)
+    plt.show("2.Remove Noise", img)
     if img is not None:
         img = img / 255.0
     else:
