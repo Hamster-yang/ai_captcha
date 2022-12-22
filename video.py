@@ -110,7 +110,7 @@ def find_squares(img):
 def main():
 
     video_path = 'testvideo.mp4'
-    output_folder = './output/'
+    output_folder = './'
 
     if os.path.isdir(output_folder):
         print("Delete old result folder: {}".format(output_folder))
