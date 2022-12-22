@@ -139,7 +139,7 @@ def main():
         cv2.drawContours( img, squares, -1, (0, 0, 255), 2 )
         cv2.imshow("cropped", crop_img)
         file_name = '{}{:04d}.jpg'.format(output_folder,i)
-        cv2.imwrite(file_name, crop_img)
+        #cv2.imwrite(file_name, crop_img)
         ch = cv2.waitKey()
 
         # 顯示圖片
