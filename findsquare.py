@@ -1,3 +1,4 @@
+from PIL import ImageGrab
 import numpy as np
 import cv2 as cv
 # 设置putText函数字体
@@ -13,17 +14,17 @@ def find_squares(img):
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     bin = cv.Canny(gray, 30, 100, apertureSize=3)    
     contours, _hierarchy = cv.findContours(bin, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-    print("轮廓数量：%d" % len(contours))
+    print("輪廓数量：%d" % len(contours))
     index = 0
-    # 轮廓遍历
+    # 輪廓
     for cnt in contours:
-        cnt_len = cv.arcLength(cnt, True) #计算轮廓周长
-        cnt = cv.approxPolyDP(cnt, 0.02*cnt_len, True) #多边形逼近
-        # 条件判断逼近边的数量是否为4，轮廓面积是否大于1000，检测轮廓是否为凸的
+        cnt_len = cv.arcLength(cnt, True) #計算輪廓周長
+        cnt = cv.approxPolyDP(cnt, 0.02*cnt_len, True) #多邊形逼近
+        # 条件判断逼近边的数量是否为4，輪廓面积是否大于1000，检测轮廓是否为凸的
         if len(cnt) == 4 and cv.contourArea(cnt) > 7000 and cv.isContourConvex(cnt):
             M = cv.moments(cnt) #计算轮廓的矩
             cx = int(M['m10']/M['m00'])
-            cy = int(M['m01']/M['m00'])#轮廓重心
+            cy = int(M['m01']/M['m00'])#輪廓数量
             cnt = cnt.reshape(-1, 2)
             max_cos = np.max([angle_cos( cnt[i], cnt[(i+1) % 4], cnt[(i+2) % 4] ) for i in range(4)])
             print(cnt[0])
@@ -52,6 +53,18 @@ def find_squares(img):
     return crop_img, squares, img
 
 def main():
+    while True:
+        # 全螢幕擷取
+        img_rgb = ImageGrab.grab()
+        img_bgr = cv.cvtColor(np.array(img_rgb), cv.COLOR_RGB2BGR)
+        cv.imshow('imm', img_bgr)
+
+        if cv.waitKey(1) & 0xFF == ord('q'):
+            break
+            
+    cv.destroyAllWindows()
+
+    
     img = cv.imread("./ai_captcha/image.png")
             
     crop_img, squares, img = find_squares(img)
