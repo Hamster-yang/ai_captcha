@@ -62,12 +62,14 @@ def find_squares(img):
     contours, _hierarchy = cv2.findContours(bin, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     print("輪廓数量：%d" % len(contours))
     index = 0
+    crop_img1 = None
+    crop_img1 = img[10, 100]
     # 輪廓
     for cnt in contours:
         cnt_len = cv2.arcLength(cnt, True) #計算輪廓周長
         cnt = cv2.approxPolyDP(cnt, 0.02*cnt_len, True) #多邊形逼近
         # 条件判断逼近边的数量是否为4，輪廓面积是否大于7000，檢测輪廓是否為凸的
-        if len(cnt) == 4 and cv2.contourArea(cnt) > 7000 and cv2.isContourConvex(cnt):
+        if len(cnt) == 4 and cv2.contourArea(cnt) > 700 and cv2.isContourConvex(cnt):
             M = cv2.moments(cnt) #計算輪廓的矩
             cx = int(M['m10']/M['m00'])
             cy = int(M['m01']/M['m00'])#輪廓數量
@@ -81,11 +83,11 @@ def find_squares(img):
             y = cnt[0][1]
 
             # 裁切區域的長度與寬度
-            w = 200
-            h = 50
-
+            w = 120
+            h = 30
+            
             # 裁切圖片
-            crop_img = img[y:y+h, x:x+w]
+            crop_img1 = img[y:y+h, x:x+w]
 
             # 只檢测矩形（cos90° = 0）
             #if max_cos < 0.1:
@@ -96,11 +98,11 @@ def find_squares(img):
                 cv.putText(img,("#%d"%index),(cx,cy),font,0.7,(255,0,255),2)
                 squares.append(cnt)
             '''
-    return crop_img, squares, img
+    return crop_img1, squares, img
 
 def main():
-
-    video_path = 'testvideo.mp4'
+    crop_img = ''
+    video_path = './testvideo12s5pic.mp4'
     output_folder = './output/'
 
     if os.path.isdir(output_folder):
