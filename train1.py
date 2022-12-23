@@ -100,8 +100,6 @@ hist = model.fit(X_train, [y_train[0], y_train[1], y_train[2], y_train[3], y_tra
 # Define function to predict captcha
 def predict(filepath):
     img = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
-    img = cv2.medianBlur(img, img, 5)
-    plt.show("2.Remove Noise", img)
     if img is not None:
         img = img / 255.0
     else:
