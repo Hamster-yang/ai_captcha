@@ -51,7 +51,7 @@ cv2.imshow("Median", median)
 cv2.waitKey(0)
 cv2.destroyWindow()'''
 
-img = cv2.imread("C:/Users/allen/Desktop/ai_captcha/test/wMJ4l.png", cv2.IMREAD_GRAYSCALE)
+'''img = cv2.imread("C:/Users/allen/Desktop/ai_captcha/test/wMJ4l.png", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("1.Remove Noise", img)
 img1=cv2.resize(img,[300,100])
 #img1 = cv2.medianBlur(img, 3)
@@ -66,7 +66,21 @@ cv2.imshow("5.Remove Noise", img4)
 img5=cv2.erode(img4,kernel,iterations = 1)
 cv2.imshow("6.Remove Noise", img5)
 
-cv2.waitKey()
+cv2.waitKey()'''
+
+image = cv2.imread("/content/ai_captcha/test/QBsJp.png")
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+plt.imshow(image,cmap='gray')
+plt.show()
+image=cv2.resize(image,[300,100])
+kernel = np.ones((3,3), np.uint8)
+image=cv2.dilate(image,kernel,iterations = 1)
+ret,image=cv2.threshold(image,195,255,cv2.THRESH_BINARY)
+
+image1=cv2.resize(image,[120,30])
+plt.imshow(image1,cmap='gray')
+
+plt.show()
 
 '''img = cv2.imread("C:/Users/allen/Desktop/ai_captcha/test/wMJ4l.png", cv2.IMREAD_GRAYSCALE)
 cv2.imshow("1.Remove Noise", img)
