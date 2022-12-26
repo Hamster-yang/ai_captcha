@@ -78,13 +78,14 @@ def find_squares(img_org):
     gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
     bin = cv.Canny(gray, 30, 100, apertureSize=3)    
     contours, _hierarchy = cv.findContours(bin, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-    #print("輪廓数量：%d" % len(contours))
+    print("輪廓数量：%d" % len(contours))
     index = 0
     # 輪廓
     for cnt in contours:
         cnt_len = cv.arcLength(cnt, True) #計算輪廓周長
         cnt = cv.approxPolyDP(cnt, 0.02*cnt_len, True) #多邊形逼近
         # 条件判断逼近边的数量是否为4，輪廓面积是否大于7000，检测轮廓是否为凸的
+        print(cnt_len)
         if len(cnt) == 4 and cv.contourArea(cnt) > 3400 and cv.isContourConvex(cnt):
             print("---------------------------------------------------------------------------")
             print("in")
@@ -145,7 +146,6 @@ def main():
 
             
             print(predict(file_name))
-            cv.waitKey()
         
         if cv.waitKey(1) & 0xFF == ord('q'):
             break
