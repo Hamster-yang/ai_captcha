@@ -156,9 +156,9 @@ def main():
       img = video[i]       
       crop_img, squares, img = find_squares(img)
       #cv2.drawContours( img, squares, -1, (0, 0, 255), 2 )
-      file_name = '{}{:04d}.png'.format(output_folder,i)
+      file_name = '{}0000.png'.format(output_folder)
       cv2.imwrite(file_name, crop_img)
-      img_predict = cv2.imread('{}{:04d}.png'.format(output_folder,i))
+      img_predict = cv2.imread('{}0000.png'.format(output_folder))
 
       
       print(predict(file_name))
