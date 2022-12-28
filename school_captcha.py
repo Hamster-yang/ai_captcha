@@ -112,6 +112,8 @@ def find_squares(img_org):
             
             crop_img = img_org[y-1:y+h, x+1:x+w]
             crop_img=cv.resize(crop_img,[120,30])
+            #kernel = np.ones((3,3), np.uint8)
+            #crop_img=cv.erode(crop_img,kernel,iterations = 1)
             find = True
             # 只检测矩形（cos90° = 0）
             #if max_cos < 0.1:
@@ -133,7 +135,8 @@ def main():
         # 全螢幕擷取
         img_rgb = ImageGrab.grab()
         img_bgr = cv.cvtColor(np.array(img_rgb), cv.COLOR_RGB2BGR)
-        
+        #show_img_1=cv.resize(img_bgr, (540, 540))  
+        cv.namedWindow("imm", cv.WINDOW_NORMAL)
         cv.imshow('imm', img_bgr)
         name = '{}full_screen.png'.format(output_folder)
         cv.imwrite(name, img_bgr)
