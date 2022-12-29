@@ -15,6 +15,7 @@ import cv2
 import string
 import numpy as np
 import random
+import keyboard
 symbols = string.ascii_lowercase+ string.ascii_uppercase + "0123456789" 
 # All symbols captcha can contain#-------------------------------------------------------
 model=load_model('model_v4_5.h5')
@@ -49,3 +50,6 @@ def predict(filepath):
     return capt#, sum(probs) / 5
 
 print(predict('./test/32LPJ.png'))
+str = predict('./test/32LPJ.png')
+keyboard.write(str)
+keyboard.press_and_release("enter")
