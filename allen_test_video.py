@@ -5,7 +5,6 @@ import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 # %matplotlib inline 
 import matplotlib.pyplot as plt
 import os
-
 from keras import layers
 from keras.models import Model
 from keras.models import load_model
@@ -13,7 +12,7 @@ from keras import callbacks
 import cv2
 import string
 import random
-
+import glob
 import string
 captcha_list = []
 img_shape = (30, 120, 1)
@@ -56,8 +55,6 @@ def predict(filepath):
         capt += symbols[l]
     return capt#, sum(probs) / 5
 
-
-import glob
 
 # 设置putText函数字体
 font=cv2.FONT_HERSHEY_SIMPLEX
