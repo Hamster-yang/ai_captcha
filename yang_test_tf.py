@@ -21,6 +21,15 @@ model=load_model('model_v4_5.h5')
 
 def predict(filepath):
     img = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
+
+    img=cv2.resize(img,[300,100])
+    kernel = np.ones((3,3), np.uint8)
+    img=cv2.dilate(img,kernel,iterations = 1)
+    ret,img=cv2.threshold(img,203,255,cv2.THRESH_BINARY)
+
+    img=cv2.resize(img,[120,30])
+
+
     if img is not None:
         img = img / 255.0
     else:
