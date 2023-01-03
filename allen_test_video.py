@@ -148,7 +148,7 @@ def main():
       #img = cv2.imread("./ai_captcha/image.png")  
       img = video[i]       
       crop_img, squares, img = find_squares(img)
-      #cv2.drawContours( img, squares, -1, (0, 0, 255), 2 )
+      cv2.drawContours( img, squares, -1, (0, 0, 255), 2 )
       file_name = '{}0000.png'.format(output_folder)
       cv2.imwrite(file_name, crop_img)
       img_predict = cv2.imread('{}0000.png'.format(output_folder))
