@@ -41,7 +41,7 @@ def predict(filepath):
     img=cv.resize(img,[300,100])
     kernel = np.ones((3,3), np.uint8)
     img=cv.dilate(img,kernel,iterations = 1)
-    ret,img=cv.threshold(img,195,255,cv.THRESH_BINARY)
+    ret,img=cv.threshold(img,203,255,cv.THRESH_BINARY)
 
     img=cv.resize(img,[120,30])
 

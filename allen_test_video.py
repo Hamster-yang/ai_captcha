@@ -75,7 +75,7 @@ def find_squares(img_org):
     for cnt in contours:
         cnt_len = cv2.arcLength(cnt, True) #計算輪廓周長
         cnt = cv2.approxPolyDP(cnt, 0.02*cnt_len, True) #多邊形逼近
-        print(cnt_len)
+        #print(cnt_len)
         # 条件判断逼近边的数量是否为4，輪廓面积是否大于7000，檢测輪廓是否為凸的
         if len(cnt) == 4 and cv2.contourArea(cnt) > 700 and cv2.isContourConvex(cnt):
             M = cv2.moments(cnt) #計算輪廓的矩
